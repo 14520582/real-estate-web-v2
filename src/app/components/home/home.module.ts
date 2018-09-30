@@ -1,8 +1,9 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {MatCardModule, MatListModule} from '@angular/material';
+import {MatCardModule, MatListModule, MatSelectModule, MatFormFieldModule, MatIconModule, MatButtonModule} from '@angular/material';
 import {SharedModule} from "../../ui-core/shared.module";
 import { HomeComponent } from "./home.component";
+import { CarouselModule } from '../../shared/carousel/carousel.module';
 
 
 const routes: Routes = [
@@ -23,8 +24,12 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedModule,
     MatCardModule,
+    MatButtonModule,
     MatListModule,
-
+    CarouselModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatSelectModule
   ],
   providers: [],
   exports: [

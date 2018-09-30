@@ -1,0 +1,35 @@
+:host ::ng-deep {
+    .contain {
+        width: 350px;
+        height: 250px;
+        margin-right: 24px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    }
+    .panel-details {
+        background-color: #4f525061;
+        width: 100%;
+        padding: 13px;
+        height: 120px;
+        color: white;
+    }
+    .detail {
+        margin-right: 16px;
+        mat-icon {
+            margin-right: 3px;
+        }
+    }
+    h1 {
+        margin: 0px;
+        color: white;
+        font-weight: 500;
+        font-size: 20px;
+        white-space:nowrap;
+    }
+    h2 {
+        margin: 0px;
+        font-weight: 500;
+        font-size: 24px;
+    }
+}

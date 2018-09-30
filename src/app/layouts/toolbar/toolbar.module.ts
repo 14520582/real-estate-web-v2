@@ -15,6 +15,7 @@ import { ToolbarComponent } from './toolbar.component';
 import { SharedModule} from '../../ui-core/shared.module';
 import { SearchBarModule} from '../../ui-core/search-bar/search-bar.module';
 import { ShortcutsModule} from '../../ui-core/shortcuts/shortcuts.module';
+import { AvatarModule } from 'ngx-avatar';
 
 
 
@@ -35,6 +36,7 @@ import { ShortcutsModule} from '../../ui-core/shortcuts/shortcuts.module';
         SearchBarModule,
         ShortcutsModule,
         MatInputModule,
+        AvatarModule,
         MatDividerModule,
         MatBadgeModule
     ],

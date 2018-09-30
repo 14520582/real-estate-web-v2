@@ -11,12 +11,17 @@ import { MainModule } from './layouts/main.module';
 import { AppStoreModule } from './ngrx-store/store.module';
 import {UiCoreModule} from './ui-core/ui.core.module';
 import {SharedModule} from './ui-core/shared.module';
+import { PropertyService } from './services/property.service';
 
 
 const appRoutes: Routes = [
   {
     path: 'home',
     loadChildren: './components/home/home.module#HomeModule'
+  },
+  {
+    path: 'properties-list',
+    loadChildren: './components/properties-list/properties-list.module#PropertiesListModule'
   },
   {
     path: 'login',
@@ -45,7 +50,8 @@ const appRoutes: Routes = [
     ],
     bootstrap   : [
         AppComponent
-    ]
+    ],
+    providers: [PropertyService]
 })
 export class AppModule
 {

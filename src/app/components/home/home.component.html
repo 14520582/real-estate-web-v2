@@ -1,7 +1,21 @@
-<mat-card fxFlex="100">
-  <mat-list fxFlex fxLayout="column">
-    <mat-list-item>
-      <h3>Home Module</h3>
-    </mat-list-item>
-  </mat-list>
-</mat-card>
+<div class="contain-home" PerfectScrollbar>
+  <div class="banner" fxLayout="column" fxLayoutAlign="center center">
+      <h1>{{slogan.get(formSelected)}}</h1>
+      <div fxLayout="row" fxLayoutAlign="center center">
+          <button class="form-btn" mat-stroked-button (click)="changeOption(0)" [ngClass]="{'active': formSelected === 0}">Mua</button>
+          <button class="form-btn" mat-stroked-button (click)="changeOption(1)" [ngClass]="{'active': formSelected === 1}">Thuê</button>
+      </div>
+      <mat-form-field appearance="fill">
+          <mat-icon class="location-icon" matPrefix>location_on</mat-icon>
+          <mat-label>Choose your location</mat-label>
+          <mat-select placeholder="Choose your location" (selectionChange)="goToPropertiesList($event)">
+            <mat-option *ngFor="let location of districts" [value]="location.id">{{location.name}}</mat-option>
+          </mat-select>
+      </mat-form-field>
+  </div>
+  <app-carousel [title]="'Có thể bạn quan tâm'" [dataSource]="newProperties"></app-carousel>
+  <app-carousel [title]="'Mới'" [dataSource]="newProperties"></app-carousel>
+  <app-carousel [title]="'Nội thành'" [dataSource]="newProperties"></app-carousel>
+  <app-carousel [title]="'Ngoại thành'" [dataSource]="newProperties"></app-carousel>
+  <app-carousel [title]="'Khu vực an ninh'" [dataSource]="newProperties"></app-carousel>
+</div>
