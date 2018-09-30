@@ -33,6 +33,7 @@ export class HomeComponent implements OnInit {
   changeOption(form: number){
     this.formSelected = form
   }
+
   goToPropertiesList(e){
     console.log(e);
     this.router.navigate(['properties-list']);

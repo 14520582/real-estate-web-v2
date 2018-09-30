@@ -1,4 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-property-card',
@@ -7,12 +8,17 @@ import {Component, OnInit, Input} from '@angular/core';
 })
 export class PropertyCardComponent implements OnInit {
   @Input() data: any;
-  constructor() {
+  constructor(
+    private router: Router
+  ) {
   }
 
   ngOnInit() {
   }
   getImage() {
     return 'url(' + this.data.cover + ')';
+  }
+  goToDetails() {
+    this.router.navigate(['property-details/', this.data.id])
   }
 }

@@ -50,4 +50,7 @@ export class ToolbarComponent
         })
 
     }
+    goHome() {
+        this.router.navigate(['/'])
+    }
 }

@@ -26,7 +26,7 @@ export class PropertyService {
     return this.http.get<any>(API.API_PROPERTY + '/get/filter?page=' + page + '&pagesize=' + CONSTANT.PAGE_SIZE_FILTER + '&content=' + content);
   }
   getDistrictByCity(city: number): Observable<any[]>  {
-    return this.http.get<any[]>(API.API_PROPERTY + 'district/get/' + city);
+    return this.http.get<any[]>(API.SERVER + 'district/get/' + city);
   }
   getWardByDistrict(district: number): Observable<any[]>  {
     return this.http.get<any[]>(API.SERVER + 'district/get/ward/' + district);

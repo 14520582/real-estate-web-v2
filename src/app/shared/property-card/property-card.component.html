@@ -1,4 +1,4 @@
-<div class="contain" [ngStyle]="{'background-image': getImage()}" fxLayout="row" fxLayoutAlign="start end">
+<div class="contain" (click)="goToDetails()" [ngStyle]="{'background-image': getImage()}" fxLayout="row" fxLayoutAlign="start end">
     <div class="panel-details" fxLayout="column" fxLayoutAlign="space-between start">
         <h1>{{data.title}}</h1>
         <h2 class="price">{{data.price | money}}</h2>

@@ -1,7 +1,7 @@
 <mat-toolbar class="p-0 mat-elevation-z1 toolbar-bg">
   <div fxFill fxLayout="row" fxLayoutAlign="space-between center">
     <div fxLayout="row" fxLayoutAlign="start center">
-      <h1 style="margin-left: 8px">FindHouse</h1>
+      <h1 (click)="goHome()" style="margin-left: 8px">FindHouse</h1>
       <h5 class="menu-dropdown">Mua</h5>
       <h5 class="menu-dropdown">Thuê</h5>
       <h5 class="menu-dropdown" #menuTriggerNews="matMenuTrigger" (mouseenter)="menuTriggerNews.openMenu()" [matMenuTriggerFor]="news">Tin

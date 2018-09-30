@@ -24,6 +24,10 @@ const appRoutes: Routes = [
     loadChildren: './components/properties-list/properties-list.module#PropertiesListModule'
   },
   {
+    path: 'property-details',
+    loadChildren: './components/property-details/property-details.module#PropertyDetailsModule'
+  },
+  {
     path: 'login',
     loadChildren: './components/login/login.module#LoginModule'
   },
