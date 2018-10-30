@@ -16,6 +16,7 @@ export class PropertyDetailsComponent implements OnInit {
     this.route.params.subscribe( params => {
       this.propertyService.getById(params.id).subscribe( dt => {
         this.data = dt;
+        console.log(dt)
       });
     });
   }
@@ -23,4 +24,20 @@ export class PropertyDetailsComponent implements OnInit {
   ngOnInit() {
   }
 
+  getType(value: number, args: number): any {
+    switch (value) {
+      case 0:
+        return 'Nhà riêng'
+      case 1:
+        if(args === 0)
+          return 'Đất nền'
+        if (args === 1)
+          return 'Mặt bằng'
+        return 'Đất nền/Mặt bằng'
+      case 2:
+        return 'Chung cư'
+      default:
+        return '--'
+      }
+  }
 }
