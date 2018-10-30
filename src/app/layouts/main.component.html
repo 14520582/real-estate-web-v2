@@ -1,42 +1,17 @@
 <mat-sidenav-container>
     <div id="app-main-content">
-
-        <!-- TOOLBAR: Above -->
-      <ng-container *ngIf="settings.layout.toolbar === 'above'">
-        <app-toolbar class="above" [ngClass]="settings.colorClasses.toolbar"></app-toolbar>
-        </ng-container>
-        <!-- / TOOLBAR: Above -->
-
-
         <div id="wrapper">
-
             <div class="content-wrapper">
-
-                <!-- TOOLBAR: Below -->
               <ng-container *ngIf="settings.layout.toolbar === 'below'">
                 <app-toolbar class="below" [ngClass]="settings.colorClasses.toolbar"></app-toolbar>
                 </ng-container>
-                <!-- / TOOLBAR: Below -->
-
                 <app-content></app-content>
-
-                <!-- FOOTER: Below -->
               <ng-container *ngIf="settings.layout.footer === 'below'">
                 <app-footer class="below" [ngClass]="settings.colorClasses.footer"></app-footer>
                 </ng-container>
-                <!-- / FOOTER: Below -->
-
             </div>
-
         </div>
-
-        <!-- FOOTER: Above -->
-      <ng-container *ngIf="settings.layout.footer === 'above'">
-        <app-footer class="above" [ngClass]="settings.colorClasses.footer"></app-footer>
-        </ng-container>
-        <!-- FOOTER: Above -->
-
+        <button class="contact-button" mat-fab color="accent"><mat-icon>headset_mic</mat-icon></button>
     </div>
-
 </mat-sidenav-container>
 

@@ -1,6 +1,36 @@
-<div class="contain">
+<div class="contain" PerfectScrollbar>
     <app-filter-bar></app-filter-bar>
     <div *ngIf="this.data">
-        <div>{{this.data.title}}</div>
+        <div class="image-container">{{this.data.title}}</div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="details-container" fxFlex="70">
+
+            </div>
+            <div class="require-form" fxFlex="30">
+                <mat-card>
+                    <div class="title-card">Yêu Cầu Thông Tin</div>
+                    <div class="form-list">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="Họ tên">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="Số điện thoại">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="Email">
+                        </mat-form-field>
+                        <div style="color: rgb(0, 132, 255); margin-bottom: 8px">Tôi muốn:</div>
+                        <mat-checkbox>Được tư vấn</mat-checkbox>
+                        <br/>
+                        <mat-checkbox>Đặt lịch xem</mat-checkbox>
+                        <br/>
+                        <button style="width: 100%; margin-top: 16px; height: 43px;" mat-raised-button color="warn">Gửi Yêu Cầu</button>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
     </div>
 </div>

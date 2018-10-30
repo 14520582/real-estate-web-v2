@@ -10,15 +10,16 @@
     }
     .mat-form-field-wrapper {
         padding-bottom: 0em;
+        font-size: 14px;
     }
     mat-expansion-panel-header {
-        height: 86px !important;
+        height: 70px !important;
     }
     .mat-content {
         align-items: center;
         display: flex;
         flex: 1;
-        height: 86px;
+        height: 70px;
         flex-direction: row;
         overflow: hidden;
     }
@@ -44,6 +45,14 @@
     }
     .mat-accent .mat-slider-track-fill, .mat-accent .mat-slider-thumb, .mat-accent .mat-slider-thumb-label {
         background-color: green;
+
+    }
+    .mat-slider-thumb-label {
+        width: 22px;
+        height: 22px;
+    }
+    .mat-slider-horizontal .mat-slider-thumb-label {
+        top: -30px;
     }
     .main-color {
         color: green;
