@@ -3,7 +3,6 @@ import {MatCardModule, MatButtonModule, MatIconModule, MatExpansionModule, MatSe
 import {SharedModule} from "../../ui-core/shared.module";
 import { FilterBarComponent } from "./filter-bar.component";
 
-
 @NgModule({
   declarations: [
     FilterBarComponent
@@ -18,7 +17,8 @@ import { FilterBarComponent } from "./filter-bar.component";
     MatButtonModule,
     MatIconModule
   ],
-  providers: [],
+  providers: [
+  ],
   exports: [FilterBarComponent]
 })
 export class FilterBarModule {

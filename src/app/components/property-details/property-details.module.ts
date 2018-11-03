@@ -4,6 +4,7 @@ import {MatCardModule, MatListModule, MatSelectModule, MatFormFieldModule, MatIc
 import {SharedModule} from "../../ui-core/shared.module";
 import { PropertyDetailsComponent } from "./property-details.component";
 import { FilterBarModule } from '../../shared/filter-bar/filter-bar.module';
+import { AgmCoreModule } from '@agm/core';
 
 
 const routes: Routes = [
@@ -19,6 +20,9 @@ const routes: Routes = [
   ],
   imports: [
     RouterModule.forChild(routes),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAEsnYcvd5qpf96b0sijRH1FC_n7B_PDXY'
+    }),
     SharedModule,
     MatCardModule,
     MatListModule,

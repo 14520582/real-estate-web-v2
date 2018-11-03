@@ -40,4 +40,7 @@ export class PropertyService {
   getItemBased(id: number): Observable<any[]> {
     return this.http.get<any[]>(API.API_PROPERTY + '/get/itembased/' + id);
   }
+  getLatLngFromAddress(address): Observable<any> {
+    return this.http.get<any>('https://geocoder.api.here.com/6.2/geocode.json?app_id=EXq3zklggymY23uZCbg1&app_code=kNhjc_eLWbVcfulbhBY_xQ&searchtext=' + address);
+  }
 }

@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import 'hammerjs';
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { GestureConfig } from '@angular/material';
 import { layoutConfig } from './layout-config';
 import { AppComponent } from './app.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -55,7 +56,10 @@ const appRoutes: Routes = [
     bootstrap   : [
         AppComponent
     ],
-    providers: [PropertyService]
+    providers: [
+      PropertyService,
+      { provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig },
+    ]
 })
 export class AppModule
 {

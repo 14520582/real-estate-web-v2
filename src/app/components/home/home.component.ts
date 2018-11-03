@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { PropertyService } from '../../services/property.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -13,19 +14,23 @@ export class HomeComponent implements OnInit {
     [1,"Tìm thuê một nơi đẹp đẽ"]
   ]);
   districts = [
-    {id: 0, name : 'Quận 1'},
-    {id: 1, name : 'Quận 2'},
-    {id: 2, name : 'Quận 3'},
-    {id: 3, name : 'Quận 4'}
   ];
+  areaSelected: FormControl;
   formSelected: number = 0;
   newProperties: any[];
   constructor(
     private router: Router,
     private propertyService: PropertyService
   ) {
+    this.areaSelected = new FormControl('');
+    this.areaSelected.valueChanges.subscribe(value => {
+      this.router.navigate(['/properties-list/', {content: 'form:' + this.formSelected + ',' + 'district:' + value}]);
+    })
   }
   ngOnInit() {
+    this.propertyService.getDistrictByCity(1).subscribe(data=>{
+      this.districts = data
+    })
     this.propertyService.getNewList(10).subscribe( dt => {
       this.newProperties = dt;
     });
@@ -37,9 +42,9 @@ export class HomeComponent implements OnInit {
   goToPropertiesList(e){
     console.log(e);
     this.router.navigate(['properties-list']);
-    // if(this.areaSelected) {
-    //   this.router.navigate(['properties-list']);
-    // }
-      // this.router.navigate(['/properties-list/', {content: 'form:' + this.formSelected + ',' + 'district:' + this.areaSelected}]);
+    if(this.areaSelected) {
+      this.router.navigate(['properties-list']);
+    }
+      this.router.navigate(['/properties-list/', {content: 'form:' + this.formSelected + ',' + 'district:' + this.areaSelected}]);
   }
 }

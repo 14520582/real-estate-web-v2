@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PropertyService } from '../../services/property.service';
 
@@ -9,14 +9,26 @@ import { PropertyService } from '../../services/property.service';
 })
 export class PropertyDetailsComponent implements OnInit {
   data: any;
+  zoom: number = 18;
+  lat: number = 10.8096243;
+  lng: number = 106.6942763;
   constructor(
     private route: ActivatedRoute,
     private propertyService: PropertyService
   ) {
-    this.route.params.subscribe( params => {
-      this.propertyService.getById(params.id).subscribe( dt => {
+    this.route.params.subscribe(params => {
+      this.propertyService.getById(params.id).subscribe(dt => {
         this.data = dt;
-        console.log(dt)
+        const address = dt.address.no + '+' + dt.address.street + ',+' + dt.address.ward.name + ',+' + dt.address.district.name + ',+' + dt.address.city.name;
+        this.propertyService.getLatLngFromAddress(address).subscribe(result => {
+          console.log(result)
+          if (result.Response.View.length > 0) {
+            this.lat = result.Response.View[0].Result[0].Location.DisplayPosition.Latitude;
+            this.lng = result.Response.View[0].Result[0].Location.DisplayPosition.Longitude;
+          }
+          
+
+        });
       });
     });
   }
@@ -29,7 +41,7 @@ export class PropertyDetailsComponent implements OnInit {
       case 0:
         return 'Nhà riêng'
       case 1:
-        if(args === 0)
+        if (args === 0)
           return 'Đất nền'
         if (args === 1)
           return 'Mặt bằng'
@@ -38,6 +50,6 @@ export class PropertyDetailsComponent implements OnInit {
         return 'Chung cư'
       default:
         return '--'
-      }
+    }
   }
 }

@@ -6,12 +6,15 @@
     h1 {
         font-size: 30px;
     }
+    agm-map {
+        height: 400px;
+    }
     .contain {
         width: 100%;
     }
     .main-info {
         width: 100%;
-        height: 350px;
+        height: 250px;
         background-color: white
     }
     mat-card {
