@@ -53,4 +53,7 @@ export class ToolbarComponent
     goHome() {
         this.router.navigate(['/'])
     }
+    navigateToNewsList(category) {
+        this.router.navigate(['/news-list/', category]);
+    }
 }

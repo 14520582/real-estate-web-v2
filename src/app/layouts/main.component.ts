@@ -3,6 +3,8 @@ import { DOCUMENT } from '@angular/common';
 import { Platform } from '@angular/cdk/platform';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../ui-core/services/ui.config.service';
+import { CallDialogComponent } from '../components/call-dialog/call-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
     selector     : 'app-main',
@@ -20,6 +22,7 @@ export class MainComponent implements OnDestroy
     constructor(
         private _renderer: Renderer2,
         private _elementRef: ElementRef,
+        private matDialog: MatDialog,
         private config: ConfigService,
         private platform: Platform,
         @Inject(DOCUMENT) private document: any
@@ -40,7 +43,9 @@ export class MainComponent implements OnDestroy
         }
 
     }
-
+    openCallDialog(){
+        this.matDialog.open(CallDialogComponent).disableClose = true;
+    }
     ngOnDestroy()
     {
         this.onConfigChanged.unsubscribe();

@@ -13,6 +13,8 @@ import { AppStoreModule } from './ngrx-store/store.module';
 import {UiCoreModule} from './ui-core/ui.core.module';
 import {SharedModule} from './ui-core/shared.module';
 import { PropertyService } from './services/property.service';
+import { ConfigurationService } from './services/app-jssip/services/configuration.service';
+import { NewsService } from './services/news.service';
 
 
 const appRoutes: Routes = [
@@ -31,6 +33,26 @@ const appRoutes: Routes = [
   {
     path: 'login',
     loadChildren: './components/login/login.module#LoginModule'
+  },
+  {
+    path: 'contact',
+    loadChildren: './components/contact/contact.module#ContactModule'
+  },
+  {
+    path: 'about',
+    loadChildren: './components/about/about.module#AboutModule'
+  },
+  {
+    path: 'post',
+    loadChildren: './components/post-page/post-page.module#PostPageModule'
+  },
+  {
+    path: 'news-details',
+    loadChildren: './components/news-details/news-details.module#NewsDetailsModule'
+  },
+  {
+    path: 'news-list',
+    loadChildren: './components/news-list/news-list.module#NewsListModule'
   },
   {
     path: '**',
@@ -58,6 +80,7 @@ const appRoutes: Routes = [
     ],
     providers: [
       PropertyService,
+      NewsService,
       { provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig },
     ]
 })
