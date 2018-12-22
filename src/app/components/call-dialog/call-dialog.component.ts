@@ -31,13 +31,6 @@ export class CallDialogComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.alive = true;
-
-    this.configurationStore.applyConfiguration().subscribe(ret => {
-      if (this.configuration.autoconnect) {
-        this.UA.connect();
-      }
-    });
-
     this.connectionStatus = this._generateConnectionStatusFeed();
 
     // Manage incoming/outgoing calls

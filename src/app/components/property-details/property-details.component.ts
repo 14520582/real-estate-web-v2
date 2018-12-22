@@ -19,16 +19,16 @@ export class PropertyDetailsComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.propertyService.getById(params.id).subscribe(dt => {
         this.data = dt;
-        const address = dt.address.no + '+' + dt.address.street + ',+' + dt.address.ward.name + ',+' + dt.address.district.name + ',+' + dt.address.city.name;
-        this.propertyService.getLatLngFromAddress(address).subscribe(result => {
-          console.log(result)
-          if (result.Response.View.length > 0) {
-            this.lat = result.Response.View[0].Result[0].Location.DisplayPosition.Latitude;
-            this.lng = result.Response.View[0].Result[0].Location.DisplayPosition.Longitude;
-          }
+        // const address = dt.address.no + '+' + dt.address.street + ',+' + dt.address.ward.name + ',+' + dt.address.district.name + ',+' + dt.address.city.name;
+        // this.propertyService.getLatLngFromAddress(address).subscribe(result => {
+        //   console.log(result)
+        //   if (result.Response.View.length > 0) {
+        //     this.lat = result.Response.View[0].Result[0].Location.DisplayPosition.Latitude;
+        //     this.lng = result.Response.View[0].Result[0].Location.DisplayPosition.Longitude;
+        //   }
           
 
-        });
+        // });
       });
     });
   }

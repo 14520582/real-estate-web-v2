@@ -15,6 +15,7 @@ import {SharedModule} from './ui-core/shared.module';
 import { PropertyService } from './services/property.service';
 import { ConfigurationService } from './services/app-jssip/services/configuration.service';
 import { NewsService } from './services/news.service';
+import { LoggerService } from './services/app-jssip/services/logger.service';
 
 
 const appRoutes: Routes = [
@@ -81,6 +82,7 @@ const appRoutes: Routes = [
     providers: [
       PropertyService,
       NewsService,
+      LoggerService,
       { provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig },
     ]
 })

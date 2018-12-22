@@ -130,6 +130,7 @@ export class CallOptions {
             this.remoteVideo.srcObject = stream;
             stream.getVideoTracks()[0].play();
         }else {
+            console.log('conntect audio')
             this.outputAudio = new Audio();
             this.outputAudio.autoplay = true;
             this.outputAudio.srcObject = stream;

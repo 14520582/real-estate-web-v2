@@ -176,7 +176,7 @@ export class UaService {
                 let callOptions;
                 if (payload['originator'] === 'local') {
                     callOptions = this.cacheOptions.shift();
-                    this.loggerService.addLog('Outgoing call')
+                    // this.loggerService.addLog('Outgoing call')
                 } else {
 
                     // const remoteVideo = <HTMLVideoElement>document.getElementById("remoteVideo")
@@ -190,7 +190,7 @@ export class UaService {
                         callOptions = new CallOptions(this.config, true);
                     }
                     
-                    this.loggerService.addLog('Incoming call')
+                    // this.loggerService.addLog('Incoming call')
 
                 }
 
@@ -203,10 +203,7 @@ export class UaService {
                 console.log(event)
                 payload = this._hydratePayload<UAnewMessageData>(event, ['originator', 'session', 'request']);
                 if (payload['originator'] === 'remote') {
-                    this.loggerService.addLog('Received a message from ' + event.request.from._uri._user + ': { ' + event.request.body + ' }')
-                }
-                else {
-                    this.loggerService.addLog('Sent a message to '+ event.request.to._uri._user +': { ' + event.request.body + ' }')
+                    this.loggerService.addLog(event.request.body)
                 }
                 break;
             }

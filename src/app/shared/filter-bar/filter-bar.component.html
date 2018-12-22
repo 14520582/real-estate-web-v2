@@ -42,7 +42,7 @@
                         <div>{{getAreaFilter(filterForm.controls['area'].value)}}</div>
                     </div>
                 </div>
-                <button mat-stroked-button class="main-color" style="margin-right: 16px;">Tìm kiếm</button>
+                <button mat-stroked-button class="main-color" style="margin-right: 16px;" (click)="filter()">Tìm kiếm</button>
             </mat-expansion-panel-header>
             <div fxLayout="row" fxLayoutAlign="start center">
                 <mat-form-field appearance="outline" (click)="$event.stopPropagation()">

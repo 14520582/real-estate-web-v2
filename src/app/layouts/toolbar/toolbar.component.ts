@@ -53,6 +53,9 @@ export class ToolbarComponent
     goHome() {
         this.router.navigate(['/'])
     }
+    goPropertyList(formSelected) {
+        this.router.navigate(['/properties-list/', {content: 'form:' + formSelected}]);
+    }
     navigateToNewsList(category) {
         this.router.navigate(['/news-list/', category]);
     }

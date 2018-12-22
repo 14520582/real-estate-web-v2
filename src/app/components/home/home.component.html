@@ -7,15 +7,14 @@
       </div>
       <mat-form-field appearance="fill">
           <mat-icon class="location-icon" matPrefix>location_on</mat-icon>
-          <mat-label>Choose your location</mat-label>
-          <mat-select placeholder="Choose your location" [formControl]="areaSelected">
+          <mat-label>Chọn khu vực bạn muốn tìm</mat-label>
+          <mat-select placeholder="Chọn khu vực bạn muốn tìm" [formControl]="areaSelected">
             <mat-option *ngFor="let location of districts" [value]="location.id">{{location.name}}</mat-option>
           </mat-select>
       </mat-form-field>
   </div>
   <app-carousel [title]="'Có thể bạn quan tâm'" [dataSource]="newProperties"></app-carousel>
   <app-carousel [title]="'Mới'" [dataSource]="newProperties"></app-carousel>
-  <app-carousel [title]="'Nội thành'" [dataSource]="newProperties"></app-carousel>
+  <app-carousel [title]="'Nội thành'" [dataSource]="uptownProperties"></app-carousel>
   <app-carousel [title]="'Ngoại thành'" [dataSource]="newProperties"></app-carousel>
-  <app-carousel [title]="'Khu vực an ninh'" [dataSource]="newProperties"></app-carousel>
 </div>

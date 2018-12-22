@@ -1,7 +1,7 @@
 import { Session } from './session';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+import { of } from 'rxjs/observable/of';
 import { interval } from 'rxjs/observable/interval';
 import 'rxjs/add/operator/switchMap';
 
@@ -180,7 +180,7 @@ export class Call {
         this.type = raw.type;
         this.inTalkSubtype = raw.subtype || null;
         this.target = raw.target;
-        this.status = Observable.of({
+        this.status = of({
             type: this.type,
             subtype: this.inTalkSubtype
         });

@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit {
   areaSelected: FormControl;
   formSelected: number = 0;
   newProperties: any[];
+  uptownProperties: any[];
+  downtownProperties: any[];
   constructor(
     private router: Router,
     private propertyService: PropertyService
@@ -33,6 +35,12 @@ export class HomeComponent implements OnInit {
     })
     this.propertyService.getNewList(10).subscribe( dt => {
       this.newProperties = dt;
+    });
+    this.propertyService.upTown(0).subscribe( dt => {
+      this.uptownProperties = dt.content;
+    });
+    this.propertyService.downTown(0).subscribe( dt => {
+      this.downtownProperties = dt.content;
     });
   }
   changeOption(form: number){

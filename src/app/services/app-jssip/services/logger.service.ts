@@ -2,32 +2,24 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Call } from './ua.service/call';
 import * as moment from 'moment';
+import { NullVisitor } from '@angular/compiler/src/render3/r3_ast';
 
 @Injectable()
 export class LoggerService {
-  private _logs: string[] = [];
-  public log: BehaviorSubject<string[]>;
+  public log: BehaviorSubject<string>;
   public call = new BehaviorSubject(new Call());
   constructor() { 
-    this.log = new BehaviorSubject(this._logs);
+    this.log = new BehaviorSubject(null);
   }
 
-  addLog(log: string) {
-    if(log === 'REJECTED' || log === 'ANSWERED' || log === 'HUNG UP')
-      this._logs.push(log);
+  addLog(content: string) {
+    if(content === 'REJECTED' || content === 'ANSWERED' || content === 'HUNG UP')
+    this.log.next(content);
     else{
-      this._logs.push(moment(moment.now()).format('YYYY-MM-DD h:mm:ss') + ' ' + log);
+      this.log.next(content);
     }
-    
-    this._emit();
   }
-
-  private _emit() {
-    this.log.next(this._logs);
-  }
-
   clearLog() {
-    this._logs = [];
-    this._emit();
+    // this._logs = [];
   }
 }

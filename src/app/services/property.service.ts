@@ -22,8 +22,13 @@ export class PropertyService {
     return this.http.get<any[]>(API.API_PROPERTY + '/get/' + district + '/' + form);
   }
   filter(content: string, page: number): Observable<any> {
-    console.log(API.API_PROPERTY + '/get/filter?page=' + page + '&pagesize=' + CONSTANT.PAGE_SIZE_FILTER + '&content=' + content)
     return this.http.get<any>(API.API_PROPERTY + '/get/filter?page=' + page + '&pagesize=' + CONSTANT.PAGE_SIZE_FILTER + '&content=' + content);
+  }
+  upTown(page: number): Observable<any> {
+    return this.http.get<any>(API.API_PROPERTY + '/get/uptown?page=' + page + '&pagesize=' + CONSTANT.PAGE_SIZE_FILTER);
+  }
+  downTown(page: number): Observable<any> {
+    return this.http.get<any>(API.API_PROPERTY + '/get/downtown?page=' + page + '&pagesize=' + CONSTANT.PAGE_SIZE_FILTER);
   }
   getDistrictByCity(city: number): Observable<any[]>  {
     return this.http.get<any[]>(API.SERVER + 'district/get/' + city);
