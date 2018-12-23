@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import { FeatureCollection, Service } from './price-map.service';
+import { FeatureCollection, PriceService } from './price-map.service';
 import { projection } from 'devextreme/viz/vector_map/projection';
 
 @Component({
   selector: 'app-price-map',
-  providers: [ Service ],
+  providers: [ PriceService ],
   templateUrl: './price-map.component.html',
   styleUrls: ['./price-map.component.scss']
 })
@@ -13,7 +13,10 @@ export class PriceMapComponent implements OnInit {
     pangaeaContinents: FeatureCollection;
     projection: any;
     prices: any;
-    constructor(service: Service) {
+    pricesData = {};
+    constructor(
+        private service: PriceService
+    ) {
         this.pangaeaContinents = service.getPangaeaContinents();
         this.customizeTooltip = this.customizeTooltip.bind(this);
         // this.prices = service.getPrices();
@@ -65,12 +68,28 @@ export class PriceMapComponent implements OnInit {
         });
     }
     ngOnInit() {
-
+        this.service.getMarketPrice().subscribe( data => {
+            data.forEach( item => {
+                this.pricesData[item.district.id] = item;
+            })
+            // console.log(this.pricesData)
+        });
     }
     customizeTooltip(arg) {
-        return {
-            text: "fgdfg"
-        };
+        console.log(arg.attribute("id"))
+        const info = this.pricesData[arg.attribute("id")];
+        if (!info) {
+            return { text : 'Không có dữ liệu'};
+        }
+        const labelPer = info.percentage > 0 ? 'Tăng: ' + info.percentage : 'Giảm: ' + Math.abs(info.percentage);
+        const rate = info.rate > 1000 ? info.rate/1000 + ' tỷ/m2' : info.rate + ' triệu/m2';
+            return {
+                html: "<div><h3>" + info.district.name + "</h3><div>Giá: " + rate 
+                + "</div><div>" + labelPer + "%</div></div>"
+            };
+    }
+    customizeText(arg) {
+        return 'sfdsfsdf';
     }
     customizeLayer(elements) {
         elements.forEach(function (element) {

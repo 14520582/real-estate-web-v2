@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { API } from '../../common/api';
 
 export class FeatureCollection {
     type: string;
@@ -14,7 +17,7 @@ export class Feature {
 
 export class FeatureProperty {
     name?: string;
-    url?: string;
+    id?: number;
     text?: string;
     color?: string;
 }
@@ -61,7 +64,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Củ Chi",
-                color: "#70b3a1"
+                color: "#70b3a1",
+                id: 783
             },
             geometry: {
                 type: "Polygon",
@@ -83,7 +87,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Hóc Môn",
-                color: "#ab394b"
+                color: "#ab394b",
+                id: 784
             },
             geometry: {
                 type: "Polygon",
@@ -105,7 +110,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Q.12",
-                color: "#bb626a"
+                color: "#bb626a",
+                id: 761
             },
             geometry: {
                 type: "Polygon",
@@ -127,7 +133,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Thủ Đức",
-                color: "#153459"
+                color: "#153459",
+                id: 762
             },
             geometry: {
                 type: "Polygon",
@@ -148,7 +155,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Q.9",
-                color: "#b1d2c6"
+                color: "#b1d2c6",
+                id: 763
             },
             geometry: {
                 type: "Polygon",
@@ -168,7 +176,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Q.2",
-                color: "#dac599"
+                color: "#dac599",
+                id: 769
             },
             geometry: {
                 type: "Polygon",
@@ -188,7 +197,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Bình Thạnh",
-                color: "#2E7D32"
+                color: "#2E7D32",
+                id: 765
             },
             geometry: {
                 type: "Polygon",
@@ -207,7 +217,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Gò Vấp",
-                color: "#D84315"
+                color: "#D84315",
+                id: 764
             },
             geometry: {
                 type: "Polygon",
@@ -228,7 +239,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Tân Bình",
-                color: "#006064"
+                color: "#006064",
+                id: 766
             },
             geometry: {
                 type: "Polygon",
@@ -248,7 +260,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "PN",
-                color: "#3E2723"
+                color: "#3E2723",
+                id: 768
             },
             geometry: {
                 type: "Polygon",
@@ -268,7 +281,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Q.3",
-                color: "#F9A825"
+                color: "#F9A825",
+                id: 770
             },
             geometry: {
                 type: "Polygon",
@@ -288,7 +302,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Q.1",
-                color: "#00838F"
+                color: "#00838F",
+                id: 760
             },
             geometry: {
                 type: "Polygon",
@@ -309,7 +324,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Q.4",
-                color: "#F9A825"
+                color: "#F9A825",
+                id: 773
             },
             geometry: {
                 type: "Polygon",
@@ -327,7 +343,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Q.7",
-                color: "#70b3a1"
+                color: "#70b3a1",
+                id: 778
             },
             geometry: {
                 type: "Polygon",
@@ -350,7 +367,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Nhà Bè",
-                color: "#C0CA33"
+                color: "#C0CA33",
+                id: 786
             },
             geometry: {
                 type: "Polygon",
@@ -373,7 +391,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Cần Giờ",
-                color: "#009688"
+                color: "#009688",
+                id: 787
             },
             geometry: {
                 type: "Polygon",
@@ -395,7 +414,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Q.10",
-                color: "#9E9E9E"
+                color: "#9E9E9E",
+                id: 771
             },
             geometry: {
                 type: "Polygon",
@@ -414,7 +434,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Q.5",
-                color: "#C0CA33"
+                color: "#C0CA33",
+                id: 774
             },
             geometry: {
                 type: "Polygon",
@@ -434,7 +455,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Q.11",
-                color: "#3949AB"
+                color: "#3949AB",
+                id: 772
             },
             geometry: {
                 type: "Polygon",
@@ -453,7 +475,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Q.6",
-                color: "#A1887F"
+                color: "#A1887F",
+                id: 775
             },
             geometry: {
                 type: "Polygon",
@@ -472,7 +495,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Tân Phú",
-                color: "#26A69A"
+                color: "#26A69A",
+                id: 767
             },
             geometry: {
                 type: "Polygon",
@@ -492,7 +516,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Bình Tân",
-                color: "#FFD600"
+                color: "#FFD600",
+                id: 777
             },
             geometry: {
                 type: "Polygon",
@@ -513,7 +538,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Q.8",
-                color: "#ab394b"
+                color: "#ab394b",
+                id: 776
             },
             geometry: {
                 type: "Polygon",
@@ -536,7 +562,8 @@ let pangaeaContinents: FeatureCollection = {
             type: "Feature",
             properties: {
                 name: "Bình Chánh",
-                color: "#dac599"
+                color: "#dac599",
+                id: 785
             },
             geometry: {
                 type: "Polygon",
@@ -567,7 +594,15 @@ let pangaeaContinents: FeatureCollection = {
 };
 
 @Injectable()
-export class Service {
+export class PriceService {
+    constructor(    
+        private http: HttpClient
+    ) {
+
+    }
+    getMarketPrice(): Observable<any[]> {
+        return this.http.get<any[]>(API.API_PRICE + '/get/all');
+    }
     getPangaeaContinents(): FeatureCollection {
         return pangaeaContinents;
     }
