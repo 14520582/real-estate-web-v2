@@ -59,4 +59,7 @@ export class ToolbarComponent
     navigateToNewsList(category) {
         this.router.navigate(['/news-list/', category]);
     }
+    navigateToPriceMap() {
+        this.router.navigate(['/price-map/']);  
+    }
 }

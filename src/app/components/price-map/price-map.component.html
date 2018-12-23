@@ -1,0 +1,17 @@
+<dx-vector-map id="map-container" [maxZoomFactor]="4" [zoomFactor]="4" [projection]="projection">
+    <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip">
+            <dxo-font color="#fff"></dxo-font>
+            <dxo-border [visible]="false"></dxo-border>
+    </dxo-tooltip>
+    <dxo-title text="Giá bất động sản khu vực TP. Hồ Chí Minh" subtitle="mỗi mảng màu là một quận, huyện thuộc thành phố"></dxo-title>
+    <dxo-export [enabled]="true"></dxo-export>
+    <dxi-layer [dataSource]="pangaeaContinents" name="continents" [customize]="customizeLayer">
+        <dxo-label [enabled]="true" dataField="name">
+        </dxo-label>
+    </dxi-layer>
+    <!-- <dxi-layer [dataSource]="prices" dataField="url" elementType="image" type="marker" [size]="28">
+        <dxo-label dataField="text">
+            <dxo-font [size]="14"></dxo-font>
+        </dxo-label>
+    </dxi-layer> -->
+</dx-vector-map>

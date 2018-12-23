@@ -9,6 +9,7 @@
       </h5>
       <mat-menu #news="matMenu" [overlapTrigger]="false">
         <span (mouseleave)="menuTriggerNews.closeMenu()">
+          <button mat-menu-item (click)="navigateToPriceMap()">Giá bất động sản khu vực</button>
           <button mat-menu-item (click)="navigateToNewsList('market')">Tin thị trường</button>
           <button mat-menu-item (click)="navigateToNewsList('analysis')">Phân tích - nhận định</button>
           <button mat-menu-item (click)="navigateToNewsList('policy')">Chính sách - Quản lý</button>

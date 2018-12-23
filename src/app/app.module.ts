@@ -56,6 +56,10 @@ const appRoutes: Routes = [
     loadChildren: './components/news-list/news-list.module#NewsListModule'
   },
   {
+    path: 'price-map',
+    loadChildren: './components/price-map/price-map.module#PriceMapModule'
+  },
+  {
     path: '**',
     redirectTo: 'home'
   }
