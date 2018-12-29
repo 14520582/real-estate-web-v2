@@ -1,23 +1,14 @@
 import  {NgModule} from '@angular/core';
-import { RouterModule, Routes} from '@angular/router';
 import {  MatIconModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatRadioModule, MatSelectModule, MatCheckboxModule, MatSnackBarModule } from '@angular/material';
 import { SharedModule } from "../../ui-core/shared.module";
-import { PostPageComponent } from "./post-page.component";
+import { PredictPageComponent } from "./predict-price.component";
 
-
-const routes: Routes = [
-  {
-    path: '',
-    component: PostPageComponent,
-  }
-];
 
 @NgModule({
   declarations: [
-    PostPageComponent
+    PredictPageComponent
   ],
   imports: [
-    RouterModule.forChild(routes),
     SharedModule,
     MatFormFieldModule,
     MatInputModule,
@@ -29,9 +20,10 @@ const routes: Routes = [
     MatCheckboxModule
   ],
   providers: [],
+  entryComponents: [PredictPageComponent],
   exports: [
-    PostPageComponent
+    PredictPageComponent
   ]
 })
-export class PostPageModule {
+export class PredictPageModule {
 }

@@ -16,6 +16,7 @@ import { SharedModule} from '../../ui-core/shared.module';
 import { SearchBarModule} from '../../ui-core/search-bar/search-bar.module';
 import { ShortcutsModule} from '../../ui-core/shortcuts/shortcuts.module';
 import { AvatarModule } from 'ngx-avatar';
+import { PredictPageModule } from '../../components/predict-price/predict-price.module';
 
 
 
@@ -37,6 +38,7 @@ import { AvatarModule } from 'ngx-avatar';
         ShortcutsModule,
         MatInputModule,
         AvatarModule,
+        PredictPageModule,
         MatDividerModule,
         MatBadgeModule
     ],

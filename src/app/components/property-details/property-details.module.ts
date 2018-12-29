@@ -5,6 +5,7 @@ import {SharedModule} from "../../ui-core/shared.module";
 import { PropertyDetailsComponent } from "./property-details.component";
 import { FilterBarModule } from '../../shared/filter-bar/filter-bar.module';
 import { AgmCoreModule } from '@agm/core';
+import { CarouselModule } from '../../shared/carousel/carousel.module';
 
 
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
     MatCheckboxModule,
     MatFormFieldModule,
     MatIconModule,
+    CarouselModule,
     FilterBarModule,
     MatSelectModule
   ],

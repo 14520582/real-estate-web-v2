@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
  
 import { Observable } from 'rxjs/Observable';
 import { API } from '../common/api';
@@ -15,8 +15,24 @@ export class PropertyService {
   getAllData(): Observable<any[]> {
     return this.http.get<any[]>(API.API_PROPERTY + '/get/new?limit='+ CONSTANT.CAROUSEL_SIZE);
   }
+  createPendingProperty(body): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    return this.http.post<any>(API.API_PENDING_PROPERTY + '/add', body, httpOptions);
+  }
   getNewList(limit: number): Observable<any[]> {
     return this.http.get<any[]>(API.API_PROPERTY + '/get/new?limit='+limit);
+  }
+  predict(body: any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    return this.http.post<any>('http://127.0.0.1:5000/predict', body, httpOptions);
   }
   getByDistrictAndForm(district: string, form: number): Observable<any[]> {
     return this.http.get<any[]>(API.API_PROPERTY + '/get/' + district + '/' + form);

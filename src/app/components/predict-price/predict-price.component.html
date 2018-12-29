@@ -2,23 +2,15 @@
   <form [formGroup]="realEstateForm" fxLayout="column" fxLayoutAlign="center center">
     <div class="row" fxLayout="row" fxLayoutAlign="start center">
       <div class="number">1</div>
-      <div class="category">Nhu cầu của bạn:</div>
-      <mat-radio-group class="radio-group" formControlName="form">
-        <mat-radio-button checked value="0">Bán</mat-radio-button>
-        <mat-radio-button value="1">Cho thuê</mat-radio-button>
-      </mat-radio-group>
-    </div>
-    <div class="row" fxLayout="row" fxLayoutAlign="start center">
-      <div class="number">2</div>
       <div class="category">Loại bất động sản:</div>
       <mat-radio-group class="radio-group" formControlName="type">
         <mat-radio-button checked value="0">Nhà riêng</mat-radio-button>
-        <mat-radio-button value="1">{{realEstateForm.controls['form'].value == 0 ? "Đất nền" : "Mặt bằng"}}</mat-radio-button>
+        <mat-radio-button value="1">Đất</mat-radio-button>
         <mat-radio-button value="2">Chung cư</mat-radio-button>
       </mat-radio-group>
     </div>
     <div class="row" fxLayout="row" fxLayoutAlign="start start">
-      <div class="number">3</div>
+      <div class="number">2</div>
       <div class="category">Địa chỉ:</div>
       <div>
         <div fxLayout="row">
@@ -38,18 +30,10 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div fxLayout="row" style="margin-top: 8px;">
-          <mat-form-field appearance="outline">
-            <input matInput placeholder="Số nhà" formControlName="no">
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <input matInput placeholder="Đường" formControlName="street">
-          </mat-form-field>
-        </div>
       </div>
     </div>
     <div class="row" fxLayout="row" fxLayoutAlign="start center">
-      <div class="number">4</div>
+      <div class="number">3</div>
       <div class="category">Diện tích:</div>
         <mat-form-field appearance="outline" style="width: 100px">
           <input matInput formControlName="area">
@@ -67,36 +51,15 @@
       </mat-form-field>
     </div>
     <div class="row" fxLayout="row" fxLayoutAlign="start start">
-      <div class="number">5</div>
+      <div class="number">4</div>
       <div class="category">Giấy chủ quyền:</div>
       <mat-radio-group class="radio-group" formControlName="license">
         <mat-radio-button checked value="0">Sổ đỏ</mat-radio-button>
         <mat-radio-button value="1">Sổ hồng</mat-radio-button>
       </mat-radio-group>
     </div>
-    <div class="row" fxLayout="row" fxLayoutAlign="start center">
-      <div class="number">6</div>
-      <div class="category">Họ tên:</div>
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="name">
-      </mat-form-field>
-    </div>
-    <div class="row" fxLayout="row" fxLayoutAlign="start center">
-      <div class="number">7</div>
-      <div class="category">Điện thoại:</div>
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="phone">
-      </mat-form-field>
-    </div>
-    <div class="row" fxLayout="row" fxLayoutAlign="start center">
-      <div class="number">8</div>
-      <div class="category">Email:</div>
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="email">
-      </mat-form-field>
-    </div>
     <div class="row" fxLayout="row" fxLayoutAlign="start start">
-      <div class="number">9</div>
+      <div class="number">5</div>
       <div class="category">Thông tin mở rộng:</div>
       <div>
         <div fxLayout="row">
@@ -119,44 +82,7 @@
         </div>
       </div>
     </div>
-    <div class="row" fxLayout="row" fxLayoutAlign="start start">
-      <div class="number">11</div>
-      <div class="category">Giá (Đơn vị ngìn đồng):</div>
-      <div>
-        <mat-form-field appearance="outline">
-          <input matInput placeholder="Nhập giá" formControlName="price">
-        </mat-form-field>
-        <div style="font-size: 16px; font-weight: 500;">{{realEstateForm.controls['price'].value | money}}</div>
-      </div>
-    </div>
-    <div class="row" fxLayout="row" fxLayoutAlign="start center">
-      <div class="number">12</div>
-      <div class="category">Hình ảnh (URL không bắt buộc):</div>
-      <mat-form-field appearance="outline">
-        <input matInput placeholder="Đường dẫn ảnh" formControlName="cover">
-      </mat-form-field>
-    </div>
-    <div class="row" fxLayout="row" fxLayoutAlign="start center">
-      <div class="number">13</div>
-      <div class="category">Tiêu đề (không bắt buộc):</div>
-      <mat-form-field appearance="outline">
-        <input matInput placeholder="Nhập tiêu đề" formControlName="title">
-      </mat-form-field>
-    </div>
-    <div class="row" fxLayout="row" fxLayoutAlign="start start">
-      <div class="number">14</div>
-      <div class="category">Miêu tả (không bắt buộc): </div>
-      <mat-form-field style="width: 400px" appearance="outline">
-        <textarea style="height: 100px" matInput placeholder="Nhập miêu tả" formControlName="description"></textarea>
-      </mat-form-field>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <mat-checkbox [(ngModel)]="checked" [ngModelOptions]="{standalone: true}"></mat-checkbox>
-      <div class="statement">Tôi đồng ý với
-        <span>điều khoản sử dụng</span> và
-        <span>biểu phí giao dịch</span>
-      </div>
-    </div>
-    <button class="comfirm-btn" (click)="submit()" mat-raised-button color="warn">Gửi thông tin</button>
+    <div *ngIf="price" style="font-size: 16px">Giá được đưa ra: <span style="font-weight: 500">{{price | money}}</span></div>
+    <button class="comfirm-btn" (click)="submit()" mat-raised-button color="warn">Dự đoán</button>
   </form>
 </div>

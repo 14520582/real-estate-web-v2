@@ -12,6 +12,7 @@ export class PropertyDetailsComponent implements OnInit {
   zoom: number = 18;
   lat: number = 10.8096243;
   lng: number = 106.6942763;
+  recommends: any;
   constructor(
     private route: ActivatedRoute,
     private propertyService: PropertyService
@@ -30,6 +31,10 @@ export class PropertyDetailsComponent implements OnInit {
 
         // });
       });
+      this.propertyService.getItemBased(params.id).subscribe(dt => {
+        this.recommends = dt;
+        console.log(dt)
+      })
     });
   }
 

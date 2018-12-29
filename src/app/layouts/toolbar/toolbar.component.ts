@@ -4,6 +4,8 @@ import { ConfigService} from '../../ui-core/services/ui.config.service';
 import { SidebarService} from '../../ui-core/sidebar/sidebar.service';
 import { Store } from '@ngrx/store';
 import * as reducers from '../../ngrx-store/reducers';
+import { MatDialog } from '@angular/material';
+import { PredictPageComponent } from '../../components/predict-price/predict-price.component';
 
 @Component({
     selector   : 'app-toolbar',
@@ -24,6 +26,7 @@ export class ToolbarComponent
     constructor(
       private router: Router,
       private config: ConfigService,
+      private dialog: MatDialog,
       private sidebarService: SidebarService,
       private store: Store<reducers.NavBarState>
     )
@@ -58,6 +61,9 @@ export class ToolbarComponent
     }
     navigateToNewsList(category) {
         this.router.navigate(['/news-list/', category]);
+    }
+    predictPrice() {
+        this.dialog.open(PredictPageComponent);
     }
     navigateToPriceMap() {
         this.router.navigate(['/price-map/']);  

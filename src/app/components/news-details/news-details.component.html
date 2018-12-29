@@ -11,6 +11,10 @@
     <h3>{{news.headline}}</h3>
     <img width="500" src={{news.thumbnail}}>
     <p>{{news.content}}</p>
+    <div *ngFor="let item of news.unites">
+      <img *ngIf="item.thumbnail" width="500" src={{item.thumbnail}}>
+      <p *ngIf="item.content">{{item.content}}</p>
+    </div>
   </div>
   </div>
   <div fxFlex="25">
