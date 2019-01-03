@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PropertyService } from '../../services/property.service';
 
 @Component({
@@ -19,6 +19,8 @@ export class PropertyDetailsComponent implements OnInit {
   ) {
     this.route.params.subscribe(params => {
       this.propertyService.getById(params.id).subscribe(dt => {
+        this.recommends = [];
+        this.recommends.push(dt);
         this.data = dt;
         // const address = dt.address.no + '+' + dt.address.street + ',+' + dt.address.ward.name + ',+' + dt.address.district.name + ',+' + dt.address.city.name;
         // this.propertyService.getLatLngFromAddress(address).subscribe(result => {
