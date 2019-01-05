@@ -21,6 +21,7 @@ export class MainComponent implements OnDestroy, OnInit
     @ViewChild('chatView') chatView: ElementRef;
     onConfigChanged: Subscription;
     settings: any;
+    hiddenChatBx = true;
     isExpanded = false;
     @HostBinding('attr.app-layout-mode') layoutMode;
     text: FormControl

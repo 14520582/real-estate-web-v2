@@ -60,6 +60,22 @@ export class PostPageComponent implements OnInit {
       })
     })
   }
+  getAddress() {
+    let address = this.realEstateForm.controls['no'].value + ', ' + this.realEstateForm.controls['street'].value + ', ';
+    for(let i = 0; i < this.wards.length; i++) {
+      if (this.wards[i].id === this.realEstateForm.controls['ward'].value) {
+        address = address + ', ' + this.wards[i].name;
+        break;
+      }
+    }
+    for(let i = 0; i < this.districts.length; i++) {
+      if (this.districts[i].id === this.realEstateForm.controls['district'].value) {
+        address = address + ', ' + this.districts[i].name;
+        break;
+      }
+    }
+    return address;
+  }
   submit() {
     if(this.realEstateForm.valid) {
       const body = {
@@ -67,8 +83,7 @@ export class PostPageComponent implements OnInit {
         price: this.realEstateForm.controls['price'].value,
         form: this.realEstateForm.controls['form'].value,
         license: this.realEstateForm.controls['license'].value,
-        address: this.realEstateForm.controls['no'].value + ', ' + this.realEstateForm.controls['street'].value + ', ' 
-        + this.realEstateForm.controls['ward'].value + ', ' + this.realEstateForm.controls['district'].value,
+        address: this.getAddress(),
         cover: this.realEstateForm.controls['cover'].value,
         numofbedroom: this.realEstateForm.controls['numberOfBedRoom'].value,
         numofbathroom: this.realEstateForm.controls['numberOfBathRoom'].value,
