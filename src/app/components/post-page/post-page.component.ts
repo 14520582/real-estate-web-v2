@@ -82,7 +82,7 @@ export class PostPageComponent implements OnInit {
         width: this.realEstateForm.controls['width'].value,
         area: this.realEstateForm.controls['area'].value,
         description: this.realEstateForm.controls['description'].value,
-        time: Date.now()
+        datecreated: Date.now()
       }
       console.log(body);
       this.propertyService.createPendingProperty(body).subscribe( res => {

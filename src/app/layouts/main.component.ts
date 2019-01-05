@@ -71,17 +71,17 @@ export class MainComponent implements OnDestroy, OnInit
             }
           });
           this.loggerService.log.subscribe(message => {
-            if(message) {
+            if (message) {
+              console.log('aa')
                 this.messageList.push({source: 'agent', content: message}); 
                 this.scrollToBottom();
             }
-        })
+        });
     }
-    openCallDialog(){
+    openCallDialog() {
         this.matDialog.open(CallDialogComponent).disableClose = true;
     }
-    ngOnDestroy()
-    {
+    ngOnDestroy() {
         this.onConfigChanged.unsubscribe();
 
     }
