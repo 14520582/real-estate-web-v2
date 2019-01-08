@@ -16,7 +16,8 @@ import { PropertyService } from './services/property.service';
 import { ConfigurationService } from './services/app-jssip/services/configuration.service';
 import { NewsService } from './services/news.service';
 import { LoggerService } from './services/app-jssip/services/logger.service';
-
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireModule } from '@angular/fire';
 
 const appRoutes: Routes = [
   {
@@ -78,7 +79,14 @@ const appRoutes: Routes = [
         UiCoreModule.forRoot(layoutConfig),
         SharedModule,
         AppStoreModule,
-        MainModule
+        MainModule,
+        AngularFireModule.initializeApp({
+          apiKey: "AIzaSyDHGf9OI9x1GexWtCDgZqNcsIYy4U0t0nc",
+          authDomain: "goldengavel-5dca5.firebaseapp.com",
+          storageBucket: "goldengavel-5dca5.appspot.com",
+          projectId: "goldengavel-5dca5",
+        }),
+        AngularFireStorageModule
     ],
     bootstrap   : [
         AppComponent

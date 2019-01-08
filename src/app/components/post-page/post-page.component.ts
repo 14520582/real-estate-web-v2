@@ -4,6 +4,7 @@ import { DATA } from '../../common/data'
 import { PropertyService } from '../../services/property.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { AngularFireStorage } from 'angularfire2/storage';
 @Component({
   selector: 'app-post-page',
   templateUrl: './post-page.component.html',
@@ -17,10 +18,13 @@ export class PostPageComponent implements OnInit {
   directions: string[] = DATA.directions;
   floors: string[] = DATA.floors;
   checked: boolean = true;
+  uploadProgress: any;
+  downloadURL = '';
   constructor(
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
     private router: Router,
+    private afStorage: AngularFireStorage,
     private propertyService: PropertyService
   ) {
     this.realEstateForm = this.formBuilder.group({
@@ -75,6 +79,23 @@ export class PostPageComponent implements OnInit {
       }
     }
     return address;
+  }
+  upload(event) {
+    const randomId = 'upload/realestate/' + Math.random().toString(36).substring(2);
+    const ref = this.afStorage.ref(randomId);
+    let task: any = ref.put(event.target.files[0]);
+    this.uploadProgress = task.percentageChanges();
+    task.snapshotChanges().pipe(
+      // finalize((a) => {console.log(a)})
+    )
+    .subscribe( snapshot => {
+      // get image upload progress
+    },
+    error => alert('Some error occured while uploading the picture'),
+    () => ref.getDownloadURL().subscribe(downloadUrl => {
+      // finally get download url from ref on completion of observable
+      this.realEstateForm.controls['cover'].setValue(downloadUrl);
+    }))
   }
   submit() {
     if(this.realEstateForm.valid) {

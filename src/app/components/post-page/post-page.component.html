@@ -129,12 +129,16 @@
         <div style="font-size: 16px; font-weight: 500;">{{realEstateForm.controls['price'].value | money}}</div>
       </div>
     </div>
-    <div class="row" fxLayout="row" fxLayoutAlign="start center">
+    <div class="row" fxLayout="row" fxLayoutAlign="start start">
       <div class="number">12</div>
       <div class="category">Hình ảnh (URL không bắt buộc):</div>
-      <mat-form-field appearance="outline">
-        <input matInput placeholder="Đường dẫn ảnh" formControlName="cover">
-      </mat-form-field>
+      <div fxLayout="column">
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="Đường dẫn ảnh" formControlName="cover">
+        </mat-form-field>
+        <progress style="margin-top: 3px" max="100" [value]="(uploadProgress | async)"></progress>
+      </div>
+      <input type="file" (change)="upload($event)" accept=".png,.jpg" />
     </div>
     <div class="row" fxLayout="row" fxLayoutAlign="start center">
       <div class="number">13</div>
