@@ -50,7 +50,7 @@ export class CallDialogComponent implements OnInit, OnDestroy {
     if (!isConnected) {
         return;
     }
-    this.UA.call('1014', false);
+    this.UA.call('1012', false);
   }
   hangUp () {
     this.call.hangup();

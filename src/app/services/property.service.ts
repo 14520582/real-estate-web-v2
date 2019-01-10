@@ -34,6 +34,30 @@ export class PropertyService {
     };
     return this.http.post<any>('http://127.0.0.1:5000/predict', body, httpOptions);
   }
+  predictHouse(body: any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    return this.http.post<any>('http://127.0.0.1:5000/predict/house', body, httpOptions);
+  }
+  predictLayout(body: any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    return this.http.post<any>('http://127.0.0.1:5000/predict/layout', body, httpOptions);
+  }
+  predictApartment(body: any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    return this.http.post<any>('http://127.0.0.1:5000/predict/apartment', body, httpOptions);
+  }
   getByDistrictAndForm(district: string, form: number): Observable<any[]> {
     return this.http.get<any[]>(API.API_PROPERTY + '/get/' + district + '/' + form);
   }
