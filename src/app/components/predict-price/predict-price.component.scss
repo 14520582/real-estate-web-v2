@@ -20,6 +20,9 @@
     mat-form-field {
         margin-right: 16px
     }
+    .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+      top: 35px
+    }
     .mat-form-field-appearance-outline .mat-form-field-infix {
         padding: 1em 0 .6em 1em;
     }
@@ -30,6 +33,9 @@
         height: 20px;
         text-align: center;
         margin-right: 6px;
+    }
+    .mat-form-field-empty.mat-form-field-label {
+      margin-top: 0px;
     }
     .mat-form-field-appearance-outline .mat-form-field-suffix {
         top: 0em;

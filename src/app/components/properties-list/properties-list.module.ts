@@ -22,10 +22,8 @@ const routes: Routes = [
   ],
   imports: [
     RouterModule.forChild(routes),
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAEsnYcvd5qpf96b0sijRH1FC_n7B_PDXY'
-    }),
     SharedModule,
+    AgmCoreModule,
     MatCardModule,
     MatListModule,
     MatPaginatorModule,

@@ -15,3 +15,60 @@
     font-size: 14px;
     margin-bottom: 5px;
 }
+agm-map {
+  height: 600px;
+}
+:host ::ng-deep {
+  .contain-home {
+    width: 100%;
+  }
+  mat-form-field {
+    min-width: 200px;
+    margin: 8px;
+  }
+  agm-map {
+    height: 100%;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: 0em 0;
+  }
+  .mat-form-field-infix {
+    border-top: 0em solid transparent;
+  }
+  .mat-form-field-wrapper {
+    padding-bottom: 0em;
+    font-size: 14px;
+  }
+  mat-expansion-panel-header {
+    height: 70px !important;
+  }
+  .mat-content {
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    flex: 1;
+    height: 70px;
+    flex-direction: row;
+    overflow: hidden;
+  }
+  mat-form-field {
+    margin-right: 16px
+  }
+  .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 1em 0 .6em 1em;
+  }
+  .selection-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-right: 16px;
+    mat-slider {
+      margin-right: 2px;
+      margin-left: 2px;
+    }
+  }
+  mat-icon {
+    color: gray
+  }
+}

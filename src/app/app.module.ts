@@ -18,6 +18,7 @@ import { NewsService } from './services/news.service';
 import { LoggerService } from './services/app-jssip/services/logger.service';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireModule } from '@angular/fire';
+import {AgmCoreModule} from "@agm/core";
 
 const appRoutes: Routes = [
   {
@@ -77,6 +78,9 @@ const appRoutes: Routes = [
         RouterModule.forRoot(appRoutes),
         TranslateModule.forRoot(),
         UiCoreModule.forRoot(layoutConfig),
+        AgmCoreModule.forRoot({
+          apiKey: 'AIzaSyAEsnYcvd5qpf96b0sijRH1FC_n7B_PDXY'
+        }),
         SharedModule,
         AppStoreModule,
         MainModule,

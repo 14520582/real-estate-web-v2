@@ -1,15 +1,68 @@
-<dx-vector-map id="map-container" [maxZoomFactor]="4" [zoomFactor]="4" [projection]="projection">
-    <dxo-title text="Biến động giá bất động sản khu vực TP. Hồ Chí Minh" subtitle="mỗi mảng màu là một quận, huyện thuộc thành phố"></dxo-title>
-    <dxo-tooltip 
-    [enabled]="true" 
-    [customizeTooltip]="customizeTooltip">
-</dxo-tooltip>
-    <dxo-export [enabled]="true"></dxo-export>
-    <dxi-layer [dataSource]="pangaeaContinents" name="continents" [customize]="customizeLayer">
-        <dxo-label [enabled]="true" dataField="name">
-        </dxo-label>
-    </dxi-layer>
-    <dxi-legend [customizeText]="customizeText">
-            <dxo-source layer="pies" grouping="color"></dxo-source>
-        </dxi-legend>
-</dx-vector-map>
+<div class="contain-home">
+  <form [formGroup]="filterForm" style="margin-left: 8px">
+    <div style="margin: 8px; font-size: 18px">Lựa chọn thông tin muốn tra cứu</div>
+    <div fxLayout="row">
+      <div fxLayout="column">
+        <div>Thời gian</div>
+        <div>
+          <mat-form-field appearance="outline" (click)="$event.stopPropagation()">
+            <mat-icon matPrefix>location_city</mat-icon>
+            <mat-select formControlName="year">
+              <mat-option *ngFor="let year of years" [value]="year">{{'Năm ' + year}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" (click)="$event.stopPropagation()">
+            <mat-icon matPrefix>location_city</mat-icon>
+            <mat-select formControlName="month">
+              <mat-option *ngFor="let item of months" [value]="item">{{'Tháng ' + item}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="column">
+        <div>Khu vực</div>
+        <div>
+          <mat-form-field appearance="outline" (click)="$event.stopPropagation()">
+            <mat-icon matPrefix>location_city</mat-icon>
+            <mat-select formControlName="city">
+              <mat-option *ngFor="let city of cities" [value]="city.id">{{city.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" (click)="$event.stopPropagation()">
+            <mat-icon matPrefix>location_on</mat-icon>
+            <mat-select formControlName="district" placeholder="Chọn quận/huyện">
+              <mat-option *ngFor="let district of districts" [value]="district">{{district.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" (click)="$event.stopPropagation()">
+            <mat-icon matPrefix>all_out</mat-icon>
+            <mat-select formControlName="ward" placeholder="Chọn phường/xã">
+              <mat-option *ngFor="let ward of wards" [value]="ward">{{ward.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-raised-button (click)="search()">Tra cứu</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="true">
+    <agm-data-layer [geoJson]="geoJsonObject" (layerClick)="clicked($event)" [style]="styleFunc">
+    </agm-data-layer>
+    <agm-polygon *ngIf="paths.length > 0" (polyClick)="clickedPoly($event)" fillColor="white" strokeColor="green" strokeWeight="2" [paths]="paths">
+    </agm-polygon>
+    <agm-info-window #infoWindow [isOpen]="!isLoading" [disableAutoPan]="true" [latitude]="infoLat" [longitude]="infoLng">
+      <div><strong>{{placeName}}</strong> (Tháng {{filterForm.controls['month'].value}}/{{filterForm.controls['year'].value}})</div>
+      <div>Giá nhà: <span *ngIf="houseData">{{houseData | money}}/m2</span><span *ngIf="!houseData">Chưa có dữ liệu</span></div>
+      <div>Giá chung cư: <span *ngIf="apartmentData">{{apartmentData | money}}/m2</span><span *ngIf="!apartmentData">Chưa có dữ liệu</span></div>
+      <div>Giá đất nền: <span *ngIf="layoutData">{{layoutData | money}}/m2</span><span *ngIf="!layoutData">Chưa có dữ liệu</span></div>
+    </agm-info-window>
+          <!--<agm-marker [latitude]="lat" [longitude]="lng" [label]="'M'">-->
+            <!--<agm-info-window>-->
+              <!--Hi, this is the content of the <strong>info window</strong>-->
+            <!--</agm-info-window>-->
+          <!--</agm-marker>-->
+  </agm-map>
+  <!--<agm-map *ngIf="isLoading" [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="true">-->
+  <!--</agm-map>-->
+</div>
+

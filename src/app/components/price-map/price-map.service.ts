@@ -606,6 +606,15 @@ export class PriceService {
     getPangaeaContinents(): FeatureCollection {
         return pangaeaContinents;
     }
+    getPolygonJson(address): Observable<any[]> {
+      return this.http.get<any>('https://nominatim.openstreetmap.org/search.php?q=' + address + '&polygon_geojson=1&format=json');
+    }
+    getPriceByDistrict(year, month, district): Observable<any[]> {
+      return this.http.get<any>(API.API_PRICE + '/get/district/' + year + '/' + month + '/' + district);
+    }
+    getPriceByWard(year, month, ward): Observable<any[]> {
+      return this.http.get<any>(API.API_PRICE + '/get/ward/' + year + '/' + month + '/' + ward);
+    }
     getPrices(): any {
         return prices;
     }
