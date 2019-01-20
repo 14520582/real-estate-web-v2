@@ -22,9 +22,35 @@ agm-map {
   .contain-home {
     width: 100%;
   }
+  .price-tooltip {
+    font-weight: 500;
+    font-size: 16px;
+    margin-left: 4px;
+  }
   mat-form-field {
     min-width: 200px;
     margin: 8px;
+  }
+  .inditor {
+    height: 21px;
+    width: 21px;
+    min-width: 21px;
+    min-height: 21px;
+    font-size: 21px;
+    line-height: 21px;
+    margin-left: 4px;
+  }
+  .not-value {
+    margin-left: 4px;
+  }
+  .down {
+    color: red;
+  }
+  .up {
+    color: green;
+  }
+  .idle {
+    color: blue;
   }
   agm-map {
     height: 100%;

@@ -23,8 +23,9 @@ export class PriceMapComponent implements OnInit {
   lat: number = 10.7758439;
   lng: number = 106.7017555;
   zoom: number = 12;
-  // lat: number = -25.274449;
-  // lng: number = 133.775060;
+  lastWardLat: number;
+  lastWardLng: number;
+  lastWardId: any;
   // zoom: number = 5;
   cities = [];
   wards = [];
@@ -36,6 +37,9 @@ export class PriceMapComponent implements OnInit {
   houseData: any;
   apartmentData: any;
   layoutData: any;
+  houseChange: any;
+  apartmentChange: any;
+  layoutChange: any;
   infoLat = 10.7758439;
   infoLng = 106.7017555;
   geoJsonObject: any = {
@@ -396,11 +400,15 @@ export class PriceMapComponent implements OnInit {
     });
   }
 
-  setData(data) {
+  setData(data1, data2) {
     this.houseData = null;
     this.apartmentData = null;
     this.layoutData = null;
-    data.forEach(item => {
+    this.houseChange = null;
+    this.apartmentChange = null;
+    this.layoutChange = null;
+
+    data1.forEach(item => {
       if (item[0] === 0) {
         this.houseData = parseInt(item[1]);
       }
@@ -411,22 +419,74 @@ export class PriceMapComponent implements OnInit {
         this.apartmentData = parseInt(item[1]);
       }
     })
+    data2.forEach(item => {
+      if (item[0] === 0) {
+        if (!this.houseData) {
+          this.houseData = parseInt(item[1]);
+          this.houseChange = 0;
+        }else {
+          this.houseChange = (this.houseData - parseInt(item[1]))/parseInt(item[1]);
+        }
+      }
+      if (item[0] === 1) {
+        if (!this.layoutData) {
+          this.layoutData = parseInt(item[1]);
+          this.layoutChange = 0;
+        }else {
+          this.layoutChange = (this.layoutData - parseInt(item[1]))/parseInt(item[1]);
+        }
+      }
+      if (item[0] === 2) {
+        if (!this.apartmentData) {
+          this.apartmentData = parseInt(item[1]);
+          this.apartmentChange = 0;
+        }else {
+          this.apartmentChange = (this.apartmentData - parseInt(item[1]))/parseInt(item[1]);
+        }
+      }
+    });
+    console.log(this.houseChange);
+    console.log(this.apartmentChange);
+    console.log(this.layoutChange);
   }
-
+  getParse(input) {
+    return Math.abs(parseInt((input * 100) + '', 10))
+  }
   clicked(clickEvent) {
     this.isLoading = true;
     this.infoLng = clickEvent.latLng.lng();
     this.infoLat = clickEvent.latLng.lat();
-    this.placeName = clickEvent.feature.l.name
-    this.service.getPriceByDistrict(this.filterForm.controls['year'].value, this.filterForm.controls['month'].value, clickEvent.feature.l.id).subscribe(
-      res => {
-        this.isLoading = false;
-        this.setData(res)
-      }
-    )
-
+    this.placeName = clickEvent.feature.l.name;
+    this.loadPrice('district', clickEvent.feature.l.id);
   }
-
+  loadPrice(type, idArea) {
+    this.isLoading = true;
+    const previousMonth = this.filterForm.controls['month'].value === 1 ? 12 : this.filterForm.controls['month'].value - 1;
+    const previousYear = this.filterForm.controls['month'].value === 1 ? this.filterForm.controls['year'].value - 1 : this.filterForm.controls['year'].value;
+    if (type !== 'ward') {
+      this.service.getPriceByDistrict(this.filterForm.controls['year'].value, this.filterForm.controls['month'].value, idArea).subscribe(
+        res => {
+          this.service.getPriceByDistrict(previousYear, previousMonth, idArea).subscribe(
+            res1 => {
+              this.setData(res, res1);
+              this.isLoading = false;
+            }
+          );
+        }
+      )
+    }else {
+      this.service.getPriceByWard(this.filterForm.controls['year'].value, this.filterForm.controls['month'].value, idArea).subscribe(
+        res => {
+          this.service.getPriceByWard(previousYear, previousMonth, idArea).subscribe(
+            res1 => {
+              this.setData(res, res1);
+              this.isLoading = false;
+            }
+          );
+        }
+      )
+    }
+  }
   styleFunc(feature) {
     return ({
       clickable: true,
@@ -454,12 +514,8 @@ export class PriceMapComponent implements OnInit {
         this.wards = w;
       })
     })
-    this.service.getPriceByDistrict(this.filterForm.controls['year'].value, this.filterForm.controls['month'].value, 760).subscribe(
-      res => {
-        this.isLoading = false;
-        this.setData(res)
-      }
-    )
+    this.loadPrice('district', 760);
+
   }
 
   getWardName(value) {
@@ -485,12 +541,9 @@ export class PriceMapComponent implements OnInit {
   search() {
     this.paths = [];
     this.isLoading = true;
-    this.placeName = this.filterForm.controls['ward'].value.name
-      this.service.getPriceByWard(this.filterForm.controls['year'].value, this.filterForm.controls['month'].value, this.filterForm.controls['ward'].value.id).subscribe(
-        res => {
-          this.setData(res);
-        }
-      )
+    this.placeName = this.filterForm.controls['ward'].value.name;
+    this.lastWardId = this.filterForm.controls['ward'].value.id;
+    this.loadPrice('ward', this.filterForm.controls['ward'].value.id);
     let address = this.getWardName(this.filterForm.controls['ward'].value.name) + ',+';
     address += this.getWardName(this.filterForm.controls['district'].value.name) + ',+ho+chi+minh+city';
     const para = this.change_alias(address);
@@ -504,6 +557,8 @@ export class PriceMapComponent implements OnInit {
           this.lng = +data2.lon;
           this.infoLng = +data2.lon;
           this.infoLat = +data2.lat;
+          this.lastWardLat = +data.lat;
+          this.lastWardLng = +data.lon;
           data2.geojson.coordinates[0].forEach( item => {
             this.paths.push({lat: item[1], lng: item[0]});
           })
@@ -515,6 +570,8 @@ export class PriceMapComponent implements OnInit {
         console.log(this.infoLng, this.infoLat)
         this.infoLng = +data.lon;
         this.infoLat = +data.lat;
+        this.lastWardLat = +data.lat;
+        this.lastWardLng = +data.lon;
         console.log(this.infoLng, this.infoLat)
         data.geojson.coordinates[0].forEach( item => {
           this.paths.push({lat: item[1], lng: item[0]});
@@ -524,7 +581,11 @@ export class PriceMapComponent implements OnInit {
     });
   }
   clickedPoly(e) {
-    console.log(e);
+    this.lat = this.lastWardLat;
+    this.lng = this.lastWardLng;
+    this.infoLng = this.lastWardLng;
+    this.infoLat = this.lastWardLat;
+    this.loadPrice('ward', this.lastWardId);
   }
   customizeTooltip(arg) {
     const info = this.pricesData[arg.attribute("id")];

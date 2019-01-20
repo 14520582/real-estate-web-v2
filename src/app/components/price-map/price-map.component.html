@@ -52,9 +52,39 @@
     </agm-polygon>
     <agm-info-window #infoWindow [isOpen]="!isLoading" [disableAutoPan]="true" [latitude]="infoLat" [longitude]="infoLng">
       <div><strong>{{placeName}}</strong> (Tháng {{filterForm.controls['month'].value}}/{{filterForm.controls['year'].value}})</div>
-      <div>Giá nhà: <span *ngIf="houseData">{{houseData | money}}/m2</span><span *ngIf="!houseData">Chưa có dữ liệu</span></div>
-      <div>Giá chung cư: <span *ngIf="apartmentData">{{apartmentData | money}}/m2</span><span *ngIf="!apartmentData">Chưa có dữ liệu</span></div>
-      <div>Giá đất nền: <span *ngIf="layoutData">{{layoutData | money}}/m2</span><span *ngIf="!layoutData">Chưa có dữ liệu</span></div>
+      <div fxLayoutAlign="start center">
+        <div>Giá nhà: </div>
+        <span class="price-tooltip" *ngIf="houseData"> {{houseData | money}}/m2</span>
+        <span *ngIf="!houseData" class="not-value">  Chưa có dữ liệu</span>
+        <div *ngIf="houseData" fxLayoutAlign="start center">
+          <mat-icon *ngIf="houseChange < 0" class="inditor down">trending_down</mat-icon>
+          <mat-icon *ngIf="houseChange > 0" class="inditor up">trending_up</mat-icon>
+          <mat-icon *ngIf="houseChange === 0" class="inditor idle">remove</mat-icon>
+          <span *ngIf="houseChange && houseChange !== 0"> {{getParse(houseChange)}}%</span>
+        </div>
+      </div>
+      <div fxLayoutAlign="start center">
+        <div>Giá chung cư: </div>
+        <span class="price-tooltip" *ngIf="apartmentData"> {{apartmentData | money}}/m2</span>
+        <span *ngIf="!apartmentData" class="not-value">  Chưa có dữ liệu</span>
+        <div *ngIf="apartmentData" fxLayoutAlign="start center">
+        <mat-icon *ngIf="apartmentChange < 0" class="inditor down">trending_down</mat-icon>
+        <mat-icon *ngIf="apartmentChange > 0" class="inditor up">trending_up</mat-icon>
+        <mat-icon *ngIf="apartmentChange === 0" class="inditor idle">remove</mat-icon>
+        <span *ngIf="apartmentChange && apartmentChange !== 0"> {{getParse(apartmentChange)}}%</span>
+        </div>
+      </div>
+      <div fxLayoutAlign="start center">
+        <div>Giá đất nền: </div>
+        <span class="price-tooltip" *ngIf="layoutData"> {{layoutData | money}}/m2</span>
+        <span *ngIf="!layoutData" class="not-value">  Chưa có dữ liệu</span>
+        <div *ngIf="layoutData" fxLayoutAlign="start center">
+        <mat-icon *ngIf="layoutChange < 0" class="inditor down">trending_down</mat-icon>
+        <mat-icon *ngIf="layoutChange > 0" class="inditor up">trending_up</mat-icon>
+        <mat-icon *ngIf="layoutChange === 0" class="inditor idle">remove</mat-icon>
+        <span *ngIf="layoutChange && layoutChange !== 0"> {{getParse(layoutChange)}}%</span>
+        </div>
+      </div>
     </agm-info-window>
           <!--<agm-marker [latitude]="lat" [longitude]="lng" [label]="'M'">-->
             <!--<agm-info-window>-->
