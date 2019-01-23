@@ -14,7 +14,7 @@
     }
     .main-info {
         width: 100%;
-        height: 250px;
+        min-height: 250px;
         background-color: white
     }
     mat-card {
@@ -66,8 +66,8 @@
         font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
     }
     .info-item {
-        margin-bottom: 8px;
-        margin-top: 8px;
+        margin-bottom: 16px;
+        margin-top: 16px;
     }
     .address {
         font-family: Roboto,"Helvetica Neue",sans-serif;
