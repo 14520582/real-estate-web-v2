@@ -52,6 +52,7 @@ export class UaService {
     }
 
     connect() {
+      console.log('a');
         this.ua = new UA(this.config.getConfiguration());
         this.ngZone.runOutsideAngular(() => {
             this.ua.start();

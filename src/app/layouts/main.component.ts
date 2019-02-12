@@ -23,6 +23,7 @@ export class MainComponent implements OnDestroy, OnInit
     settings: any;
     hiddenChatBx = true;
     isExpanded = false;
+    sub: Subscription;
     @HostBinding('attr.app-layout-mode') layoutMode;
     text: FormControl
     messageList = [{
@@ -66,9 +67,10 @@ export class MainComponent implements OnDestroy, OnInit
         } catch(err) { }                 
     }
     ngOnInit() {
-        this.configurationStore.applyConfiguration().subscribe(ret => {
+        this.sub = this.configurationStore.applyConfiguration().subscribe(ret => {
             if (this.configuration.autoconnect) {
               this.UA.connect();
+              this.sub.unsubscribe();
             }
           });
           this.loggerService.log.subscribe(message => {
@@ -90,7 +92,7 @@ export class MainComponent implements OnDestroy, OnInit
         if (this.text.value) {
             this.messageList.push({source: 'me', content: this.text.value});
             console.log()
-            this.UA.sendMsg('1012', this.text.value);
+            this.UA.sendMsg('1016', this.text.value);
             this.scrollToBottom();
             this.text.setValue('');
         }
